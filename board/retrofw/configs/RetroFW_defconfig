@@ -1,9 +1,9 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2021.02.6 Configuration
+# Buildroot 2021.11-8-gb1788dc0f8 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
-BR2_EXTERNAL_RETROFW_PATH="/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot-2021.11/retrofw"
+BR2_EXTERNAL_RETROFW_PATH="/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw"
 BR2_HOST_GCC_AT_LEAST_4_9=y
 BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
@@ -109,6 +109,7 @@ BR2_CCACHE_DIR="$(HOME)/.buildroot-ccache"
 BR2_CCACHE_INITIAL_SETUP=""
 BR2_CCACHE_USE_BASEDIR=y
 # BR2_ENABLE_DEBUG is not set
+# BR2_ENABLE_RUNTIME_DEBUG is not set
 BR2_STRIP_strip=y
 BR2_STRIP_EXCLUDE_FILES=""
 BR2_STRIP_EXCLUDE_DIRS=""
@@ -791,7 +792,10 @@ BR2_PACKAGE_DEJAVU_SERIF_CONDENSED=y
 #
 # glmark2 needs an OpenGL or an openGL ES and EGL backend
 #
-# BR2_PACKAGE_GLSLSANDBOX_PLAYER is not set
+
+#
+# glslsandbox-player needs a toolchain w/ threads and an openGL ES and EGL driver
+#
 # BR2_PACKAGE_GNUPLOT is not set
 # BR2_PACKAGE_JHEAD is not set
 
@@ -799,7 +803,6 @@ BR2_PACKAGE_DEJAVU_SERIF_CONDENSED=y
 # kmscube needs EGL, GBM and OpenGL ES, and a toolchain w/ thread support
 #
 # BR2_PACKAGE_LIBVA_UTILS is not set
-# BR2_PACKAGE_MESA3D_DEMOS is not set
 BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 # BR2_PACKAGE_NETSURF is not set
 # BR2_PACKAGE_PNGQUANT is not set
@@ -863,8 +866,6 @@ BR2_PACKAGE_MESA3D=y
 # Off-screen Rendering
 #
 # BR2_PACKAGE_MESA3D_OSMESA_GALLIUM is not set
-BR2_PACKAGE_PROVIDES_LIBEGL="mesa3d-etna_viv"
-BR2_PACKAGE_PROVIDES_LIBGLES="mesa3d-etna_viv"
 # BR2_PACKAGE_OCRAD is not set
 
 #
@@ -894,12 +895,36 @@ BR2_PACKAGE_SDL_NET=y
 BR2_PACKAGE_SDL_SOUND=y
 # BR2_PACKAGE_SDL_SOUND_PLAYSOUND is not set
 BR2_PACKAGE_SDL_TTF=y
-# BR2_PACKAGE_SDL2 is not set
+BR2_PACKAGE_SDL2=y
+
+#
+# DirectFB video driver needs directfb
+#
+
+#
+# X11 video driver needs X.org
+#
+
+#
+# KMS/DRM video driver needs mesa3d w/ GBM
+#
+
+#
+# OpenGL support needs X11 and an OpenGL provider
+#
+
+#
+# OpenGL ES support needs an OpenGL ES provider
+#
+BR2_PACKAGE_SDL2_GFX=y
+BR2_PACKAGE_SDL2_IMAGE=y
+BR2_PACKAGE_SDL2_MIXER=y
+BR2_PACKAGE_SDL2_NET=y
+BR2_PACKAGE_SDL2_TTF=y
 
 #
 # Other GUIs
 #
-BR2_PACKAGE_QT5_GL_AVAILABLE=y
 BR2_PACKAGE_QT5_JSCORE_AVAILABLE=y
 # BR2_PACKAGE_QT5 is not set
 
@@ -1717,7 +1742,10 @@ BR2_PACKAGE_LIBDRM_HAS_ATOMIC=y
 # BR2_PACKAGE_LIBDRM_NOUVEAU is not set
 # BR2_PACKAGE_LIBDRM_ETNAVIV is not set
 # BR2_PACKAGE_LIBDRM_INSTALL_TESTS is not set
-# BR2_PACKAGE_LIBEPOXY is not set
+
+#
+# libepoxy needs an OpenGL and/or OpenGL EGL backend
+#
 # BR2_PACKAGE_LIBEXIF is not set
 
 #
@@ -1757,12 +1785,13 @@ BR2_PACKAGE_LIBSVG_CAIRO=y
 # BR2_PACKAGE_LIBSVGTINY is not set
 # BR2_PACKAGE_LIBVA is not set
 # BR2_PACKAGE_LIBVIPS is not set
-# BR2_PACKAGE_LIBWPE is not set
+
+#
+# libwpe needs a toolchain w/ C++, dynamic library and an OpenEGL-capable backend
+#
 # BR2_PACKAGE_MENU_CACHE is not set
 # BR2_PACKAGE_OPENCV3 is not set
 # BR2_PACKAGE_OPENCV4 is not set
-BR2_PACKAGE_HAS_LIBEGL=y
-BR2_PACKAGE_HAS_LIBGLES=y
 # BR2_PACKAGE_OPENJPEG is not set
 # BR2_PACKAGE_PANGO is not set
 # BR2_PACKAGE_PANGOMM is not set
@@ -3123,13 +3152,61 @@ BR2_PACKAGE_HOST_UTIL_LINUX=y
 #
 
 #
-# Legacy options removed in 2021.02
+# Legacy options removed in 2021.11
 #
+# BR2_OPENJDK_VERSION_LTS is not set
+# BR2_OPENJDK_VERSION_LATEST is not set
+# BR2_PACKAGE_MPD_TIDAL is not set
+# BR2_PACKAGE_MROUTED_RSRR is not set
+# BR2_BINUTILS_VERSION_CSKY is not set
+# BR2_GCC_VERSION_CSKY is not set
+# BR2_PACKAGE_CANFESTIVAL is not set
+# BR2_PACKAGE_NMAP_NDIFF is not set
+# BR2_GDB_VERSION_8_3 is not set
+# BR2_PACKAGE_PYTHON_MELD3 is not set
+# BR2_PACKAGE_STRONGSWAN_EAP is not set
 # BR2_PACKAGE_GNURADIO_PAGER is not set
+# BR2_KERNEL_HEADERS_5_11 is not set
+# BR2_KERNEL_HEADERS_5_12 is not set
+# BR2_KERNEL_HEADERS_5_13 is not set
+
+#
+# Legacy options removed in 2021.08
+#
+BR2_TARGET_GRUB2_BUILTIN_MODULES=""
+BR2_TARGET_GRUB2_BUILTIN_CONFIG=""
+# BR2_PACKAGE_LIBMCRYPT is not set
+# BR2_PACKAGE_MCRYPT is not set
+# BR2_PACKAGE_PHP_EXT_MCRYPT is not set
+# BR2_BINUTILS_VERSION_2_34_X is not set
+# BR2_PACKAGE_LIBSOIL is not set
+# BR2_PACKAGE_CLAPACK is not set
+# BR2_PACKAGE_SPIDERMONKEY is not set
+# BR2_PACKAGE_KODI_LIBVA is not set
+# BR2_PACKAGE_PYTHON_COHERENCE is not set
+# BR2_PACKAGE_PHP_EXT_XMLRPC is not set
+# BR2_GCC_VERSION_8_X is not set
+
+#
+# Legacy options removed in 2021.05
+#
+# BR2_PACKAGE_UDISKS_LVM2 is not set
+# BR2_PACKAGE_LVM2_APP_LIBRARY is not set
+# BR2_PACKAGE_LVM2_LVMETAD is not set
+# BR2_PACKAGE_MONKEY is not set
+# BR2_PACKAGE_DOCKER_CONTAINERD is not set
+# BR2_PACKAGE_IOSTAT is not set
 # BR2_PACKAGE_SCONESERVER_HTTP_SCONESITE_IMAGE is not set
 # BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE_EVDEV is not set
 # BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE_KBD is not set
 # BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE_MOUSE is not set
+# BR2_PACKAGE_MESA3D_OSMESA_CLASSIC is not set
+# BR2_PACKAGE_MESA3D_DRI_DRIVER_SWRAST is not set
+# BR2_PACKAGE_KODI_SCREENSAVER_CRYSTALMORPH is not set
+
+#
+# Legacy options removed in 2021.02
+#
 # BR2_PACKAGE_MPD_AUDIOFILE is not set
 # BR2_PACKAGE_AUDIOFILE is not set
 # BR2_BINUTILS_VERSION_2_33_X is not set
@@ -3147,6 +3224,9 @@ BR2_PACKAGE_HOST_UTIL_LINUX=y
 #
 # Legacy options removed in 2020.11
 #
+# BR2_PACKAGE_GPSD_FIXED_PORT_SPEED is not set
+# BR2_PACKAGE_GPSD_RECONFIGURE is not set
+# BR2_PACKAGE_GPSD_CONTROLSEND is not set
 # BR2_PACKAGE_OPENCV is not set
 # BR2_PACKAGE_LIBCROCO is not set
 # BR2_PACKAGE_BELLAGIO is not set
@@ -3699,7 +3779,7 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 #
 
 #
-# RetroFW (in /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot-2021.11/retrofw)
+# RetroFW (in /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw)
 #
 
 #
@@ -3714,9 +3794,5 @@ BR2_PACKAGE_RECOVERY=y
 BR2_PACKAGE_ETNA_VIV=y
 BR2_PACKAGE_ETNA_VIV_ABIV2=y
 # BR2_PACKAGE_ETNA_VIV_ABIV4 is not set
-BR2_PACKAGE_MESA3D_ETNA_VIV=y
-# BR2_PACKAGE_MESA3D_ETNA_VIV_DEBUG is not set
-BR2_PACKAGE_MESA3D_ETNA_VIV_EGL=y
-BR2_PACKAGE_MESA3D_ETNA_VIV_GLES=y
-# BR2_PACKAGE_MESA3D_ETNA_VIV_VG is not set
+# BR2_PACKAGE_MESA3D_ETNA_VIV is not set
 BR2_PACKAGE_GMENUNX=y
