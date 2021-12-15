@@ -6,10 +6,10 @@
 
 ROOTFS_SQUASHFS_DEPENDENCIES = host-squashfs
 
-ROOTFS_SQUASHFS_ARGS = -noappend -processors $(PARALLEL_JOBS)
+ROOTFS_SQUASHFS_ARGS = 
 
 ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS_PAD),)
-ROOTFS_SQUASHFS_ARGS += -nopad
+ROOTFS_SQUASHFS_ARGS += 
 endif
 
 ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS4_LZ4),y)
@@ -23,11 +23,11 @@ ROOTFS_SQUASHFS_ARGS += -comp xz
 else ifeq ($(BR2_TARGET_ROOTFS_SQUASHFS4_ZSTD),y)
 ROOTFS_SQUASHFS_ARGS += -comp zstd
 else
-ROOTFS_SQUASHFS_ARGS += -comp gzip
+ROOTFS_SQUASHFS_ARGS += 
 endif
 
 define ROOTFS_SQUASHFS_CMD
-	$(HOST_DIR)/bin/mksquashfs $(TARGET_DIR) $@ $(ROOTFS_SQUASHFS_ARGS)
+	$(HOST_DIR)/bin/mksquashfs $(TARGET_DIR) $@ $(ROOTFS_SQUASHFS_ARGS) -all-root -noappend -no-exports -no-xattrs
 endef
 
 $(eval $(rootfs))
