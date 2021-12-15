@@ -18,6 +18,11 @@ Then, to build the toolchain, run:
 make toolchain
 ~~~
 
+To build SDK run:
+~~~bash
+make sdk
+~~~
+
 You can also build particular libraries and packages this way, for example to build SDL and SDL_Image:
 
 ~~~bash
