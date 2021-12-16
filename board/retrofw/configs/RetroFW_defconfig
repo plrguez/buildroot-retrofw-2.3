@@ -1,15 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2021.11-8-gb1788dc0f8 Configuration
+# Buildroot 2021.11 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
-BR2_EXTERNAL_RETROFW_PATH="/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw"
+BR2_EXTERNAL_RETROFW_PATH="/notebooks/buildroot-2021.11.x/board/retrofw"
 BR2_HOST_GCC_AT_LEAST_4_9=y
 BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
 BR2_HOST_GCC_AT_LEAST_7=y
-BR2_HOST_GCC_AT_LEAST_8=y
-BR2_HOST_GCC_AT_LEAST_9=y
 
 #
 # Target options
@@ -448,7 +446,10 @@ BR2_PACKAGE_KODI_ARCH_SUPPORTS=y
 # BR2_PACKAGE_MJPEGTOOLS is not set
 # BR2_PACKAGE_MODPLUGTOOLS is not set
 # BR2_PACKAGE_MOTION is not set
-# BR2_PACKAGE_MPD is not set
+
+#
+# mpd needs a toolchain w/ C++, threads, wchar, gcc >= 7, host gcc >= 7
+#
 # BR2_PACKAGE_MPD_MPC is not set
 BR2_PACKAGE_MPG123=y
 # BR2_PACKAGE_MPV is not set
@@ -792,10 +793,7 @@ BR2_PACKAGE_DEJAVU_SERIF_CONDENSED=y
 #
 # glmark2 needs an OpenGL or an openGL ES and EGL backend
 #
-
-#
-# glslsandbox-player needs a toolchain w/ threads and an openGL ES and EGL driver
-#
+# BR2_PACKAGE_GLSLSANDBOX_PLAYER is not set
 # BR2_PACKAGE_GNUPLOT is not set
 # BR2_PACKAGE_JHEAD is not set
 
@@ -803,6 +801,7 @@ BR2_PACKAGE_DEJAVU_SERIF_CONDENSED=y
 # kmscube needs EGL, GBM and OpenGL ES, and a toolchain w/ thread support
 #
 # BR2_PACKAGE_LIBVA_UTILS is not set
+# BR2_PACKAGE_MESA3D_DEMOS is not set
 BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 # BR2_PACKAGE_NETSURF is not set
 # BR2_PACKAGE_PNGQUANT is not set
@@ -866,6 +865,8 @@ BR2_PACKAGE_MESA3D=y
 # Off-screen Rendering
 #
 # BR2_PACKAGE_MESA3D_OSMESA_GALLIUM is not set
+BR2_PACKAGE_PROVIDES_LIBEGL="mesa3d-etna_viv"
+BR2_PACKAGE_PROVIDES_LIBGLES="mesa3d-etna_viv"
 # BR2_PACKAGE_OCRAD is not set
 
 #
@@ -912,10 +913,7 @@ BR2_PACKAGE_SDL2=y
 #
 # OpenGL support needs X11 and an OpenGL provider
 #
-
-#
-# OpenGL ES support needs an OpenGL ES provider
-#
+BR2_PACKAGE_SDL2_OPENGLES=y
 BR2_PACKAGE_SDL2_GFX=y
 BR2_PACKAGE_SDL2_IMAGE=y
 BR2_PACKAGE_SDL2_MIXER=y
@@ -925,6 +923,7 @@ BR2_PACKAGE_SDL2_TTF=y
 #
 # Other GUIs
 #
+BR2_PACKAGE_QT5_GL_AVAILABLE=y
 BR2_PACKAGE_QT5_JSCORE_AVAILABLE=y
 # BR2_PACKAGE_QT5 is not set
 
@@ -1188,7 +1187,10 @@ BR2_PACKAGE_LUAJIT_ARCH_SUPPORTS=y
 # BR2_PACKAGE_MOARVM is not set
 BR2_PACKAGE_HOST_MONO_ARCH_SUPPORTS=y
 BR2_PACKAGE_NODEJS_ARCH_SUPPORTS=y
-# BR2_PACKAGE_NODEJS is not set
+
+#
+# nodejs needs a toolchain w/ C++, dynamic library, NPTL, gcc >= 7, wchar, host gcc >= 8
+#
 BR2_PACKAGE_HOST_OPENJDK_BIN_ARCH_SUPPORTS=y
 # BR2_PACKAGE_PERL is not set
 # BR2_PACKAGE_PHP is not set
@@ -1742,10 +1744,7 @@ BR2_PACKAGE_LIBDRM_HAS_ATOMIC=y
 # BR2_PACKAGE_LIBDRM_NOUVEAU is not set
 # BR2_PACKAGE_LIBDRM_ETNAVIV is not set
 # BR2_PACKAGE_LIBDRM_INSTALL_TESTS is not set
-
-#
-# libepoxy needs an OpenGL and/or OpenGL EGL backend
-#
+# BR2_PACKAGE_LIBEPOXY is not set
 # BR2_PACKAGE_LIBEXIF is not set
 
 #
@@ -1785,13 +1784,12 @@ BR2_PACKAGE_LIBSVG_CAIRO=y
 # BR2_PACKAGE_LIBSVGTINY is not set
 # BR2_PACKAGE_LIBVA is not set
 # BR2_PACKAGE_LIBVIPS is not set
-
-#
-# libwpe needs a toolchain w/ C++, dynamic library and an OpenEGL-capable backend
-#
+# BR2_PACKAGE_LIBWPE is not set
 # BR2_PACKAGE_MENU_CACHE is not set
 # BR2_PACKAGE_OPENCV3 is not set
 # BR2_PACKAGE_OPENCV4 is not set
+BR2_PACKAGE_HAS_LIBEGL=y
+BR2_PACKAGE_HAS_LIBGLES=y
 # BR2_PACKAGE_OPENJPEG is not set
 # BR2_PACKAGE_PANGO is not set
 # BR2_PACKAGE_PANGOMM is not set
@@ -1950,6 +1948,7 @@ BR2_PACKAGE_EXPAT=y
 # BR2_PACKAGE_LIBROXML is not set
 # BR2_PACKAGE_LIBUCL is not set
 # BR2_PACKAGE_LIBXML2 is not set
+BR2_PACKAGE_HOST_LIBXML2_PYTHON=y
 # BR2_PACKAGE_LIBXMLPP is not set
 # BR2_PACKAGE_LIBXMLRPC is not set
 # BR2_PACKAGE_LIBXSLT is not set
@@ -3127,7 +3126,10 @@ BR2_PACKAGE_HOST_PATCHELF=y
 BR2_PACKAGE_HOST_QEMU_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_SYSTEM_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_USER_ARCH_SUPPORTS=y
-# BR2_PACKAGE_HOST_QEMU is not set
+
+#
+# host-qemu needs a host gcc >= 8
+#
 # BR2_PACKAGE_HOST_QORIQ_RCW is not set
 # BR2_PACKAGE_HOST_RAUC is not set
 BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS=y
@@ -3779,7 +3781,7 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 #
 
 #
-# RetroFW (in /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw)
+# RetroFW (in /notebooks/buildroot-2021.11.x/board/retrofw)
 #
 
 #
@@ -3794,5 +3796,9 @@ BR2_PACKAGE_RECOVERY=y
 BR2_PACKAGE_ETNA_VIV=y
 BR2_PACKAGE_ETNA_VIV_ABIV2=y
 # BR2_PACKAGE_ETNA_VIV_ABIV4 is not set
-# BR2_PACKAGE_MESA3D_ETNA_VIV is not set
+BR2_PACKAGE_MESA3D_ETNA_VIV=y
+# BR2_PACKAGE_MESA3D_ETNA_VIV_DEBUG is not set
+BR2_PACKAGE_MESA3D_ETNA_VIV_EGL=y
+BR2_PACKAGE_MESA3D_ETNA_VIV_GLES=y
+# BR2_PACKAGE_MESA3D_ETNA_VIV_VG is not set
 BR2_PACKAGE_GMENUNX=y

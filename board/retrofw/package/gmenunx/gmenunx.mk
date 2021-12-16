@@ -3,7 +3,7 @@
 # gmenunx
 #
 ################################################################################
-GMENUNX_VERSION = 5ec9a3d
+GMENUNX_VERSION = 4797331
 GMENUNX_SITE = https://github.com/pingflood/gmenunx.git
 GMENUNX_SITE_METHOD = git
 
