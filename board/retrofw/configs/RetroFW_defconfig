@@ -3,7 +3,7 @@
 # Buildroot 2021.11 Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
-BR2_EXTERNAL_RETROFW_PATH="/notebooks/buildroot-2021.11.x/board/retrofw"
+BR2_EXTERNAL_RETROFW_PATH="/notebooks/br-rw/buildroot-2021.11.x/board/retrofw"
 BR2_HOST_GCC_AT_LEAST_4_9=y
 BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
@@ -376,7 +376,7 @@ BR2_ROOTFS_POST_SCRIPT_ARGS=""
 # Target packages
 #
 BR2_PACKAGE_BUSYBOX=y
-BR2_PACKAGE_BUSYBOX_CONFIG="package/busybox/busybox.config"
+BR2_PACKAGE_BUSYBOX_CONFIG="board/retrofw/busybox.config"
 BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES=""
 # BR2_PACKAGE_BUSYBOX_SHOW_OTHERS is not set
 # BR2_PACKAGE_BUSYBOX_INDIVIDUAL_BINARIES is not set
@@ -835,38 +835,13 @@ BR2_PACKAGE_FBV_GIF=y
 #
 # linux-fusion needs a Linux kernel to be built
 #
-BR2_PACKAGE_MESA3D=y
-
-#
-# Gallium drivers
-#
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_ETNAVIV is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_LIMA is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_NOUVEAU is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_PANFROST is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_SWRAST is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_TEGRA is not set
-# BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_VIRGL is not set
-
-#
-# Gallium VDPAU state tracker needs X.org and gallium drivers r300, r600, radeonsi or nouveau
-#
-
-#
-# DRI drivers
-#
-# BR2_PACKAGE_MESA3D_DRI_DRIVER_NOUVEAU is not set
-
-#
-# Vulkan drivers
-#
-
-#
-# Off-screen Rendering
-#
-# BR2_PACKAGE_MESA3D_OSMESA_GALLIUM is not set
+# BR2_PACKAGE_MESA3D_DRI_DRIVER_SWRAST is not set
 BR2_PACKAGE_PROVIDES_LIBEGL="mesa3d-etna_viv"
 BR2_PACKAGE_PROVIDES_LIBGLES="mesa3d-etna_viv"
+
+#
+# mesa3d needs udev /dev management and a toolchain w/ C++, largefile, NPTL
+#
 # BR2_PACKAGE_OCRAD is not set
 
 #
@@ -3203,7 +3178,6 @@ BR2_TARGET_GRUB2_BUILTIN_CONFIG=""
 # BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE_KBD is not set
 # BR2_PACKAGE_XSERVER_XORG_SERVER_KDRIVE_MOUSE is not set
 # BR2_PACKAGE_MESA3D_OSMESA_CLASSIC is not set
-# BR2_PACKAGE_MESA3D_DRI_DRIVER_SWRAST is not set
 # BR2_PACKAGE_KODI_SCREENSAVER_CRYSTALMORPH is not set
 
 #
@@ -3781,7 +3755,7 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 #
 
 #
-# RetroFW (in /notebooks/buildroot-2021.11.x/board/retrofw)
+# RetroFW (in /notebooks/br-rw/buildroot-2021.11.x/board/retrofw)
 #
 
 #
