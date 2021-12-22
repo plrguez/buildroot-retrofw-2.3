@@ -1,13 +1,15 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2021.11 Configuration
+# Buildroot 2021.11-19-g5220a5785c-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
-BR2_EXTERNAL_RETROFW_PATH="/notebooks/br-rw/buildroot-2021.11.x/board/retrofw"
+BR2_EXTERNAL_RETROFW_PATH="/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw"
 BR2_HOST_GCC_AT_LEAST_4_9=y
 BR2_HOST_GCC_AT_LEAST_5=y
 BR2_HOST_GCC_AT_LEAST_6=y
 BR2_HOST_GCC_AT_LEAST_7=y
+BR2_HOST_GCC_AT_LEAST_8=y
+BR2_HOST_GCC_AT_LEAST_9=y
 
 #
 # Target options
@@ -446,10 +448,7 @@ BR2_PACKAGE_KODI_ARCH_SUPPORTS=y
 # BR2_PACKAGE_MJPEGTOOLS is not set
 # BR2_PACKAGE_MODPLUGTOOLS is not set
 # BR2_PACKAGE_MOTION is not set
-
-#
-# mpd needs a toolchain w/ C++, threads, wchar, gcc >= 7, host gcc >= 7
-#
+# BR2_PACKAGE_MPD is not set
 # BR2_PACKAGE_MPD_MPC is not set
 BR2_PACKAGE_MPG123=y
 # BR2_PACKAGE_MPV is not set
@@ -1162,10 +1161,7 @@ BR2_PACKAGE_LUAJIT_ARCH_SUPPORTS=y
 # BR2_PACKAGE_MOARVM is not set
 BR2_PACKAGE_HOST_MONO_ARCH_SUPPORTS=y
 BR2_PACKAGE_NODEJS_ARCH_SUPPORTS=y
-
-#
-# nodejs needs a toolchain w/ C++, dynamic library, NPTL, gcc >= 7, wchar, host gcc >= 8
-#
+# BR2_PACKAGE_NODEJS is not set
 BR2_PACKAGE_HOST_OPENJDK_BIN_ARCH_SUPPORTS=y
 # BR2_PACKAGE_PERL is not set
 # BR2_PACKAGE_PHP is not set
@@ -3101,10 +3097,7 @@ BR2_PACKAGE_HOST_PATCHELF=y
 BR2_PACKAGE_HOST_QEMU_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_SYSTEM_ARCH_SUPPORTS=y
 BR2_PACKAGE_HOST_QEMU_USER_ARCH_SUPPORTS=y
-
-#
-# host-qemu needs a host gcc >= 8
-#
+# BR2_PACKAGE_HOST_QEMU is not set
 # BR2_PACKAGE_HOST_QORIQ_RCW is not set
 # BR2_PACKAGE_HOST_RAUC is not set
 BR2_PACKAGE_HOST_RUSTC_ARCH_SUPPORTS=y
@@ -3755,7 +3748,7 @@ BR2_TARGET_UBOOT_CUSTOM_PATCH_DIR=""
 #
 
 #
-# RetroFW (in /notebooks/br-rw/buildroot-2021.11.x/board/retrofw)
+# RetroFW (in /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot_retrofw/buildroot/board/retrofw)
 #
 
 #
