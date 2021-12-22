@@ -3,7 +3,7 @@
 # gmenunx
 #
 ################################################################################
-GMENUNX_VERSION = master
+GMENUNX_VERSION = 4797331
 #GMENUNX_SITE = $(call github,pingflood,gmenunx,$(GMENUNX_VERSION))
 GMENUNX_SITE = https://github.com/pingflood/gmenunx
 GMENUNX_SITE_METHOD = git

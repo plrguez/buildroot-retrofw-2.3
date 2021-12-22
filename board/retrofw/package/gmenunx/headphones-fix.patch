@@ -1,0 +1,80 @@
+diff --git a/src/inputmanager.cpp b/src/inputmanager.cpp
+index 40426d7..b81e3dd 100644
+--- a/src/inputmanager.cpp
++++ b/src/inputmanager.cpp
+@@ -358,7 +358,7 @@ uint32_t InputManager::hardwareMonitor() {
+ 			return 200;
+ 		}
+ 
+-		tvout = gmenu2x->platform->getTVOut();
++		tvout = gmenu2x->platform->getTVOutStatus();
+ 		if (tvout_ != tvout) {
+ 			tvout_ = tvout;
+ 			pushEvent(tvout);
+diff --git a/src/platform.h b/src/platform.h
+index d1d6f07..50db3e1 100644
+--- a/src/platform.h
++++ b/src/platform.h
+@@ -58,7 +58,7 @@ public:
+ 	virtual uint16_t getDevices();
+ 	virtual uint8_t getMMC() { return MMC_REMOVE; };
+ 	virtual uint8_t getUDC() { return UDC_REMOVE; };
+-	virtual uint8_t getTVOut() { return TV_REMOVE; };
++	virtual uint8_t getTVOutStatus() { return TV_REMOVE; };
+ 	virtual int16_t getBattery(bool raw = false) { return 6; };
+ 	virtual uint8_t getVolumeMode(uint8_t vol) { if (!vol) return VOLUME_MODE_MUTE; return VOLUME_MODE_NORMAL; };
+ 	virtual void setVolume(int val) { };
+diff --git a/src/platform/retrofw.h b/src/platform/retrofw.h
+index 514a4d5..8116f99 100644
+--- a/src/platform/retrofw.h
++++ b/src/platform/retrofw.h
+@@ -157,6 +157,7 @@ public:
+ 
+ 		if (mode < 0) {
+ 			int option;
++			mode = TV_OFF;
+ 			if (gmenu2x->confStr["tvMode"] == "NTSC") option = CONFIRM;
+ 			else if (gmenu2x->confStr["tvMode"] == "PAL") option = MANUAL;
+ 			else if (gmenu2x->confStr["tvMode"] == "OFF") option = CANCEL;
+@@ -175,12 +176,10 @@ public:
+ 				case MANUAL:
+ 					mode = TV_PAL;
+ 					break;
+-				default:
+-					mode = TV_OFF;
+ 			}
+ 		}
+ 
+-		if (mode != val) {
++		if (mode != getTVOut()) {
+ 			if (FILE *f = fopen("/proc/jz/tvout", "a")) {
+ 				fprintf(f, "%d\n", mode); // fputs(val, f);
+ 				fclose(f);
+@@ -191,7 +190,17 @@ public:
+ 		}
+ 	}
+ 
+-	uint8_t getTVOut() {
++
++	uint16_t getTVOut() {
++		int val = 0;
++		if (FILE *f = fopen("/proc/jz/tvout", "r")) {
++			fscanf(f, "%i", &val);
++			fclose(f);
++		}
++		return val;
++	}
++	
++	uint8_t getTVOutStatus() {
+ 		if (memdev > 0) {
+ 			if (fwtype == FW_RETROARCADE && !(mem[PDPIN] >> 6 & 1)) return TV_CONNECT;
+ 			if (!(mem[PDPIN] >> 25 & 1)) return TV_CONNECT;
+@@ -293,7 +302,7 @@ public:
+ 	}
+ 
+ 	void setCPU(uint32_t mhz) {
+-		if (getTVOut() != TV_REMOVE) {
++		if (getTVOut()) {
+ 			WARNING("Can't overclock when TV out is enabled.");
+ 			return;
+ 		}
