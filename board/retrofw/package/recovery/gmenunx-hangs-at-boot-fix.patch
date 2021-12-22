@@ -1,0 +1,16 @@
+diff --git a/src/recovery.c b/src/recovery.c
+index 3b64298..c7e1b91 100644
+--- a/src/recovery.c
++++ b/src/recovery.c
+@@ -582,8 +582,9 @@ int main(int argc, char* argv[]) {
+ 			execlp("/bin/sh", "/bin/sh", "-c", "source /media/mmcblk1p1/autoexec.sh", NULL);
+ 		} else if (file_exists("/home/retrofw/autoexec.sh")) {
+ 			execlp("/bin/sh", "/bin/sh", "-c", "source /home/retrofw/autoexec.sh", NULL);
+-		} else if (execlp("/usr/bin/gmenunx", "/usr/bin/gmenunx", NULL)) {
+-			// gmenunx start
++		} else if (file_exists("/usr/bin/gmenunx")) {
++			(execlp("/usr/bin/gmenunx", "/usr/bin/gmenunx", NULL));
++							// gmenunx start
+ 		} else if (execlp("/home/retrofw/apps/gmenu2x/gmenu2x", "/home/retrofw/apps/gmenu2x/gmenu2x", NULL)) {
+ 			// gmenu2x start
+ 		}
