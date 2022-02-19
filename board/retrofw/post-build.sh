@@ -31,5 +31,6 @@ ln -sf /etc/issue "${TARGET}"/etc/issue.net
 ln -sf /lib/libc.so.0 "${TARGET}"/lib/libpthread.so.0
 ln -sf /lib/libc.so.0 "${TARGET}"/lib/libm.so.0
 ln -sf /lib/libc.so.0 "${TARGET}"/lib/libdl.so.0
+ln -sf /usr/lib/libjpeg.so.9 "${TARGET}"/usr/lib/libjpeg.so.8
 
 sed -i "s/VERSION_ID.*/VERSION_ID=$(date -I)/" "${TARGET}"/etc/os-release
