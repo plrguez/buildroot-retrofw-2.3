@@ -111,3 +111,17 @@ index d9b3db1..e7cdc29 100644
  };
  
  #endif
+diff --git a/src/powermanager.cpp b/src/powermanager.cpp
+index 9691d7d..88d800c 100644
+--- a/src/powermanager.cpp
++++ b/src/powermanager.cpp
+@@ -32,6 +32,8 @@
+ 	clearTimer();
+ 	if (this->suspendTimeout > 0)
+ 		powerTimer = SDL_AddTimer(this->suspendTimeout * 1e3, doSuspend, NULL);
++	else
++		resetPowerTimer();
+ };
+ 
+ void PowerManager::resetPowerTimer() {
+
