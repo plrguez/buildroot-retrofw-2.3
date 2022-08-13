@@ -1,0 +1,72 @@
+diff --git a/src/platform.h b/src/platform.h
+index 50db3e1..8d33819 100644
+--- a/src/platform.h
++++ b/src/platform.h
+@@ -25,6 +25,7 @@
+ 	FW_RETROARCADE,
+ 	FW_OPEN2X,
+ 	FW_GPH,
++	FW_PAPG2,
+ };
+ 
+ class Platform {
+diff --git a/src/platform/retrofw.h b/src/platform/retrofw.h
+index 46af24c..f0d7a82 100644
+--- a/src/platform/retrofw.h
++++ b/src/platform/retrofw.h
+@@ -97,11 +97,15 @@
+ 		if (w == 320 && h == 480) h = 240;
+ 
+ 		if (FILE *f = fopen("/proc/jz/gpio", "r")) {
+-			char buf[7];
+-			fread(buf, sizeof(char), 7, f);
++			char buf[25];
++			fread(buf, sizeof(char), 25, f);
+ 			fclose(f);
+ 			if (!strncmp(buf, "480x272", 7)) {
+-				fwtype = FW_RETROARCADE;
++				if (strlen(buf) > 19 && !strncmp(&buf[20], "PAPG2", 5)) {
++					fwtype = FW_PAPG2;
++				} else {
++					fwtype = FW_RETROARCADE;
++				}
+ 				udc = false;
+ 			} else {
+ 				joystick = false;
+@@ -202,8 +206,13 @@
+ 	
+ 	uint8_t getTVOutStatus() {
+ 		if (memdev > 0) {
++			// PAPK3 uses D06 and PAP-Gameta-II uses D05 low for TV-Out
++			if (fwtype == FW_PAPG2) {
++				if (mem[PDPIN] >> 5 & 1) return TV_CONNECT;
++			} else {
+ 			if (fwtype == FW_RETROARCADE && !(mem[PDPIN] >> 6 & 1)) return TV_CONNECT;
+ 			if (!(mem[PDPIN] >> 25 & 1)) return TV_CONNECT;
++			}
+ 		}
+ 		return TV_REMOVE;
+ 	}
+@@ -215,7 +224,7 @@
+ 
+ 	uint8_t getUDC() {
+ 		// if (memdev > 0 && ((mem[PDPIN] >> 7 & 1) || (mem[PEPIN] >> 13 & 1))) return UDC_CONNECT;
+-		if (fwtype == FW_RETROARCADE) {
++		if (fwtype == FW_RETROARCADE || fwtype == FW_PAPG2) {
+ 			if (FILE *f = fopen("/proc/jz/udc", "r")) {
+ 				char buf[7];
+ 				fread(buf, sizeof(char), 7, f);
+@@ -248,7 +257,12 @@
+ 	}
+ 
+ 	uint8_t getVolumeMode(uint8_t vol) {
+-		if (memdev > 0 && !(mem[PDPIN] >> 6 & 1)) return VOLUME_MODE_PHONES;
++		// PAP Gameta II Plus uses PIN D05 low
++		if (fwtype == FW_PAPG2) {
++			if (memdev > 0 && (mem[PDPIN] >> 5 & 1)) return VOLUME_MODE_PHONES;
++		} else { 
++			if (memdev > 0 && !(mem[PDPIN] >> 6 & 1)) return VOLUME_MODE_PHONES;
++		}
+ 		return Platform::getVolumeMode(vol);
+ 	}
+ 
