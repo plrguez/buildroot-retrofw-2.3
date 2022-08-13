@@ -3,7 +3,7 @@
 # gmenunx
 #
 ################################################################################
-GMENUNX_VERSION = 2792a8593ab0ccafef1696e66967593e4a425bd4
+GMENUNX_VERSION = v2.3
 GMENUNX_SITE = $(call github,retrofw,gmenunx,$(GMENUNX_VERSION))
 
 GMENUNX_DEPENDENCIES = sdl sdl_image sdl_ttf
