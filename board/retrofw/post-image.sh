@@ -19,14 +19,28 @@ else
 	RETROFW_VERSION="download/${RETROFW_VERSION}"
 fi
 
+if [ -z "$GPIO" ]; then
+	UIMAGE_NAME="$LCD"
+else
+	UIMAGE_NAME="${LCD}_${GPIO}"
+fi
+
 title "Building RetroFW image..."
 
 wget -q --show-progress -N -P "${BINARIES_DIR}/" \
 https://github.com/retrofw/retrofw/releases/${RETROFW_VERSION}/RetroFW_${LCD}_U-Boot.bin \
-https://github.com/retrofw/retrofw/releases/${RETROFW_VERSION}/RetroFW_${LCD}_uImage.bin
+https://github.com/retrofw/retrofw/releases/${RETROFW_VERSION}/RetroFW_${UIMAGE_NAME}_uImage.bin
 
 cp "${BINARIES_DIR}/RetroFW_${LCD}_U-Boot.bin" "${BINARIES_DIR}/u-boot.bin"
-cp "${BINARIES_DIR}/RetroFW_${LCD}_uImage.bin" "${BINARIES_DIR}/uImage.bin"
+cp "${BINARIES_DIR}/RetroFW_${UIMAGE_NAME}_uImage.bin" "${BINARIES_DIR}/uImage.bin"
+
+if [ -n "$LOCAL_UBOOT_DIR" ]; then
+	cp "${LOCAL_UBOOT_DIR}/RetroFW_${LCD}_U-Boot.bin" "${BINARIES_DIR}/u-boot.bin"
+fi
+
+if [ -n "$LOCAL_KERNEL_DIR" ]; then
+	cp "${LOCAL_KERNEL_DIR}/RetroFW_${UIMAGE_NAME}_uImage.bin" "${BINARIES_DIR}/uImage.bin"
+fi
 
 touch "${BINARIES_DIR}/.prsz" "${BINARIES_DIR}/.fsck" "${BINARIES_DIR}/.defl"
 
@@ -40,5 +54,5 @@ genimage                           \
 rm "${BINARIES_DIR}/.prsz" "${BINARIES_DIR}/.fsck" "${BINARIES_DIR}/.defl"
 
 title "Zipping image file"
-rm -f ${BINARIES_DIR}/RetroFW_${LCD}.zip
-zip -j ${BINARIES_DIR}/RetroFW_${LCD}.zip ${BINARIES_DIR}/RetroFW.img
+rm -f ${BINARIES_DIR}/RetroFW_${UIMAGE_NAME}.zip
+zip -j ${BINARIES_DIR}/RetroFW_${UIMAGE_NAME}.zip ${BINARIES_DIR}/RetroFW.img
