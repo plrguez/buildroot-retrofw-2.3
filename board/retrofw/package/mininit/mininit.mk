@@ -14,6 +14,10 @@ define MININIT_BUILD_CMDS
 endef
 
 define MININIT_INSTALL_TARGET_CMDS
+	mkdir -p $(TARGET_DIR)/usr/share/mininit
+	cp -r \
+		$(@D)/license.txt \
+		$(TARGET_DIR)/usr/share/mininit
 	$(INSTALL) -m 0755 $(@D)/mininit-syspart $(BINARIES_DIR)/mininit-syspart
 endef
 
